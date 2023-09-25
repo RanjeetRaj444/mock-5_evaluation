@@ -91,7 +91,7 @@ router.patch("/employees/:id", verifyToken, async (req, res) => {
 		);
 
 		if (!updatedEmployee) {
-			return res.status(404).send({ message: "Employee not found." });
+			return res.status(204).send({ message: "Employee not found." });
 		}
 
 		res.status(201).send({
@@ -110,7 +110,7 @@ router.delete("/employees/:id", verifyToken, async (req, res) => {
 
 		const deletedEmployee = await Employee.findByIdAndDelete(id);
 		if (!deletedEmployee) {
-			return res.status(404).send({ message: "Employee not found." });
+			return res.status(204).send({ message: "Employee not found." });
 		}
 
 		res.status(201).send({
