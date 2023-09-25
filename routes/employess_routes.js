@@ -31,42 +31,42 @@ router.post("/employees", verifyToken, async (req, res) => {
 
 router.get("/employees", verifyToken, async (res, req) => {
 	try {
-		const {
-			page = 1,
-			limit = 5,
-			sortField = "firstName",
-			sortOrder = "async",
-			departmentFilter = "",
-			searchQuerry = "",
-		} = req.querry;
+		// const {
+		// 	page = 1,
+		// 	limit = 5,
+		// 	sortField = "firstName",
+		// 	sortOrder = "async",
+		// 	departmentFilter = "",
+		// 	searchQuerry = "",
+		// } = req.querry;
 
-		const skip = (page - 1) * limit;
-		const sort = {};
-		sort[sortField] = sortOrder === "asc" ? 1 : -1;
+		// const skip = (page - 1) * limit;
+		// const sort = {};
+		// sort[sortField] = sortOrder === "asc" ? 1 : -1;
 
-		const query = {};
-		if (departmentFilter) {
-			query.department = departmentFilter;
-		}
+		// const query = {};
+		// if (departmentFilter) {
+		// 	query.department = departmentFilter;
+		// }
 
-		if (searchQuerry) {
-			query.$or = [
-				{
-					firstName: {
-						$regex: searchQuerry,
-						$option: "i",
-					},
-				},
-			];
-		}
+		// if (searchQuerry) {
+		// 	query.$or = [
+		// 		{
+		// 			firstName: {
+		// 				$regex: searchQuerry,
+		// 				$option: "i",
+		// 			},
+		// 		},
+		// 	];
+		// }
 
 		// const totalEmployees = await Employee.countDocuments(query);
-		const employee = await Employee.find(query)
-			.sort(sort)
-			.skip(skip)
-			.limit(parseInt(limit));
+		const employee = await Employee.find()
+			// .sort(sort)
+			// .skip(skip)
+			// .limit(parseInt(limit));
 
-		res.status(201).send({ totalEmployees, employee });
+		res.status(201).send({ employee });
 	} catch (err) {
 		console.log(err);
 		res.status(401).send({ message: err.message });
