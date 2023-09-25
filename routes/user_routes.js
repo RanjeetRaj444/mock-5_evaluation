@@ -29,7 +29,7 @@ router.post("/signup", async (req, res) => {
 
 		await newUser.save();
 
-		req.status(201).send("Signup successfull");
+		res.status(201).send("Signup successfull");
 	} catch (err) {
 		console.log(err);
 		res.status(500).send({ message: err.message });
