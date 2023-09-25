@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/auth", userRoutes);
-app.use("/api", auth_middleware, employeeRoutes);
+app.use("/api", employeeRoutes);
 
 app.listen(process.env.PORT, async () => {
 	try {
