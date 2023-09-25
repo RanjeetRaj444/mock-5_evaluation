@@ -60,11 +60,11 @@ router.get("/employees", verifyToken, async (res, req) => {
 			];
 		}
 
-		const totalEmployees = await Employee.countDocuments(query);
+		// const totalEmployees = await Employee.countDocuments(query);
 		const employee = await Employee.find(query)
-			// .sort(sort)
-			// .skip(skip)
-			// .limit(parseInt(limit));
+			.sort(sort)
+			.skip(skip)
+			.limit(parseInt(limit));
 
 		res.status(201).send({ totalEmployees, employee });
 	} catch (err) {
