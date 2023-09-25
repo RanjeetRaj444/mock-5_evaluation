@@ -14,7 +14,7 @@ router.post("/signup", async (req, res) => {
 		const existingUser = await User.findOne({ email });
 
 		if (existingUser) {
-			return res.status(400).send({
+			return res.status(200).send({
 				message: "User already exists.",
 			});
 		}
@@ -42,13 +42,13 @@ router.post("/login", async (req, res) => {
 		const user = await User.findOne({ email });
 
 		if (!user) {
-			return res.status(401).send({ message: "Invalid credentials." });
+			return res.status(200).send({ message: "Invalid credentials." });
 		}
 
 		//verify
 		const passwordMatch = await bcrypt.compare(password, user.password);
 		if (!passwordMatch) {
-			return res.status(401).send({ message: "Invalid credentials." });
+			return res.status(200).send({ message: "Invalid credentials." });
 		}
 
 		const token = jwt.sign(
